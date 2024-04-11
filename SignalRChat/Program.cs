@@ -1,7 +1,10 @@
+using SignalRChat.Hubs;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -14,6 +17,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseRouting();
@@ -21,5 +25,7 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
+
+app.MapHub<ChatHub>("/chatHub");
 
 app.Run();
